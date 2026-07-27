@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button'
-
+import { registerAction } from '../actions';
 type signUpFormType = z.infer<typeof registerSchema>;
 
 export function SignupForm () {
@@ -19,8 +19,8 @@ export function SignupForm () {
  }
  );
 
-  const onSubmit: SubmitHandler<signUpFormType> = (data) => {
-        console.log(data)
+  const onSubmit: SubmitHandler<signUpFormType> = async (data) => {
+      await registerAction(data)     
   }
   return (
 
