@@ -1,32 +1,26 @@
 "use server"
 
 import { registerSchema } from "./schemas";
+import { RegisterForm, RegisterInput } from "./types";
 
 import { registerUser } from "./service";
-import {z } from "zod"
-type registerInput = z.infer<typeof registerSchema>
 
-export async function registerAction(data: registerInput) {
+export async function registerAction(data: RegisterForm) {
     
-    // const value = Object.fromEntries(formData);
     const validated = registerSchema.safeParse(data);
 
     if(!validated.success) {
         return {
             success: false,
-            errors : validated.error.flatten().fieldErrors
+            errors : validated.error.flatten().fieldErrors,
+            message: "Validation failed"
         }
     }
-
-
-     try {
-    // 2. Call your service function
-    const result = await registerUser(validated.data);
-    return { success: true, user: result.user };
-    
-  } catch (error) {
-    // 3. Catch Better Auth errors (e.g., email already exists)
-    return { error: error || "Something went wrong." };
-  }
+    const parsedData: RegisterInput  = {
+        name: validated.data.name,
+        email: validated.data.email,
+        password: validated.data.password
+    }
+    return await registerUser(parsedData);
 
 }
