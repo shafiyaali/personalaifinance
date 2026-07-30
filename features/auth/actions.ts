@@ -1,9 +1,9 @@
 "use server"
 
-import { registerSchema } from "./schemas";
-import { RegisterForm, RegisterInput } from "./types";
+import { registerSchema, LogInSchema } from "./schemas";
+import { RegisterForm, RegisterInput, LoginForm } from "./types";
 
-import { registerUser } from "./service";
+import { registerUser, LogInUser } from "./service";
 
 export async function registerAction(data: RegisterForm) {
     
@@ -23,4 +23,17 @@ export async function registerAction(data: RegisterForm) {
     }
     return await registerUser(parsedData);
 
+}
+
+export async function LoginAction(data: LoginForm) {
+    const validated = LogInSchema.safeParse(data);
+    if(!validated.success) {
+        return {
+            success: false,
+            errors : validated.error.flatten().fieldErrors,
+            message: "Validation failed"
+        }
+    }
+
+    return await LogInUser(validated.data)
 }

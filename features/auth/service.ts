@@ -1,6 +1,8 @@
 import { auth } from "@/lib/auth"
-import { RegisterInput, RegisterResponse } from "./types"
+import { RegisterInput, RegisterResponse, LoginForm, LoginResponse } from "./types"
 import { ActionResult } from "@/types/action-result"
+import { headers } from "next/headers";
+import { APIError } from "better-auth";
 export async function registerUser(data: RegisterInput): Promise<ActionResult<RegisterResponse>> {
 
     try {
@@ -21,20 +23,49 @@ export async function registerUser(data: RegisterInput): Promise<ActionResult<Re
 
     } catch (error) {
 
-        if (
-            error instanceof Error &&
-            error.message.includes("User already exists")
-        ) {
-
-            return {
+        if (error instanceof APIError ) {
+           return {
                 success: false,
-                message: "Email already exists.",
+                message: error.message,
             };
         }
 
         return {
             success: false,
             message: "Unable to create account.",
+        };
+    }
+}
+
+export async function LogInUser(data: LoginForm): Promise<ActionResult<LoginResponse>>{
+
+    try{
+
+ 
+    const user = await auth.api.signInEmail({
+        body: {
+            email: data.email,
+            password: data.password
+        },
+        headers: await headers()
+    })
+
+    return {
+            success: true,
+            data: user,
+            message: "user registered successfully"
+        };
+    } 
+        catch (error) {
+        if (error instanceof APIError) {
+            return {
+                success: false,
+                message: error.message,
+            };
+        }
+        return {
+            success: false,
+            message: "Unable to Login. Something went wrong",
         };
     }
 }

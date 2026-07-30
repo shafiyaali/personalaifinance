@@ -20,3 +20,11 @@ export const registerSchema = z.strictObject({
 
   });
 
+export const LogInSchema = z.strictObject({
+    email:z.email({
+        error:"Please enter a valid Email"
+    }),
+    password: z.string()
+    .min(1, {error: "Please enter a Password"})
+})
+

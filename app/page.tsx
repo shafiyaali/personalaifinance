@@ -1,5 +1,5 @@
-import Image from "next/image";
-import { SignupForm } from "@/features/auth/components/register-form";
+
+import  {SignupForm}  from "@/features/auth/components/register-form";
 export default function Home() {
   return (
     <SignupForm />

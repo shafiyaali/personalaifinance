@@ -72,7 +72,7 @@ export function SignupForm () {
            {isSubmitting ? "Creating Account" : "Create Account"}
         </Button>
 
-        <>Already have an account? <Link className='underline text-blue-500' href={"/auth/signIn"}> Sign In</Link></>
+        <>Already have an account? <Link className='underline text-blue-500' href={"/sign-in"}> Sign In</Link></>
      </form>
      
             </CardContent>
