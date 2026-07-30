@@ -3,7 +3,9 @@
 import { registerSchema, LogInSchema } from "./schemas";
 import { RegisterForm, RegisterInput, LoginForm } from "./types";
 
-import { registerUser, LogInUser } from "./service";
+import { registerUser, LogInUser, SignOutUser } from "./service";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function registerAction(data: RegisterForm) {
     
@@ -36,4 +38,11 @@ export async function LoginAction(data: LoginForm) {
     }
 
     return await LogInUser(validated.data)
+}
+
+export async function SignOutAction () {
+    await SignOutUser();
+    revalidatePath("/sign-in");
+    redirect("sign-in")
+    
 }

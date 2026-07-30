@@ -69,3 +69,10 @@ export async function LogInUser(data: LoginForm): Promise<ActionResult<LoginResp
         };
     }
 }
+
+export async function SignOutUser() {
+
+    await auth.api.signOut({
+        headers: await headers(),
+    })
+}
