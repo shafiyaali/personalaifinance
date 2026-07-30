@@ -37,7 +37,7 @@ export async function registerUser(data: RegisterInput): Promise<ActionResult<Re
     }
 }
 
-export async function LogInUser(data: LoginForm): Promise<ActionResult<LoginResponse>>{
+export async function SigninUser(data: LoginForm): Promise<ActionResult<LoginResponse>>{
 
     try{
 
@@ -70,7 +70,7 @@ export async function LogInUser(data: LoginForm): Promise<ActionResult<LoginResp
     }
 }
 
-export async function SignOutUser() {
+export async function SignoutUser() {
 
     await auth.api.signOut({
         headers: await headers(),

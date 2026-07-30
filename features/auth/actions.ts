@@ -3,7 +3,7 @@
 import { registerSchema, LogInSchema } from "./schemas";
 import { RegisterForm, RegisterInput, LoginForm } from "./types";
 
-import { registerUser, LogInUser, SignOutUser } from "./service";
+import { registerUser, SigninUser, SignoutUser } from "./service";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -37,11 +37,11 @@ export async function LoginAction(data: LoginForm) {
         }
     }
 
-    return await LogInUser(validated.data)
+    return await SigninUser(validated.data)
 }
 
 export async function SignOutAction () {
-    await SignOutUser();
+    await SignoutUser();
     revalidatePath("/sign-in");
     redirect("sign-in")
     
