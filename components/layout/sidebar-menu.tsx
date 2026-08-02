@@ -29,11 +29,13 @@ const SidebarMenuItems = () => {
    <SidebarMenu>
   {navItems.map((nav) => (
     <SidebarMenuItem key={nav.title}>
+      <Link
+         href={nav.href} >
       <SidebarMenuButton >
-        <Link href={nav.href} className='flex gap-3'>
         <nav.icon />{nav.title}
-        </Link>
+       
       </SidebarMenuButton>
+       </Link>
     </SidebarMenuItem>
   ))}
 </SidebarMenu>

@@ -1,13 +1,15 @@
 import React from 'react'
-import { Sidebar, SidebarContent, SidebarMenu,SidebarFooter,SidebarGroup, SidebarHeader, SidebarMenuItem, SidebarMenuButton, SidebarGroupContent, SidebarGroupLabel,SidebarGroupAction,  } from '../ui/sidebar'
+import { Sidebar, SidebarContent, SidebarMenu,SidebarFooter, SidebarHeader, SidebarMenuItem, SidebarMenuButton } from '../ui/sidebar'
 // import SignOut from '@/features/auth/components/sign-out'
 // import { Button } from '../ui/button'
-import { Settings, User, LogOutIcon, LayoutDashboard } from 'lucide-react'
+import { Settings, User, LogOutIcon} from 'lucide-react'
 import SidebarItems from './sidebar-menu'
 import { Separator } from '../ui/separator'
-
-const AppSidebar = () => {
+import { getCurrentSession } from '@/lib/session'
+import { SignOutAction } from '@/features/auth/actions'
+const AppSidebar = async () => {
     
+    const session = await getCurrentSession();
   return (
     <Sidebar>
         <SidebarHeader className='p-5' >AI Finance</SidebarHeader>
@@ -19,9 +21,9 @@ const AppSidebar = () => {
         <SidebarFooter>
             <SidebarMenu>
                 <SidebarMenuItem>
-                    <SidebarMenuButton><User />Thanveer</SidebarMenuButton>
+                    <SidebarMenuButton><User />{session?.user.name}</SidebarMenuButton>
                     <SidebarMenuButton ><Settings /> Settings</SidebarMenuButton>
-                    <SidebarMenuButton><LogOutIcon />  LogOut</SidebarMenuButton>
+                    <SidebarMenuButton onClick={SignOutAction}><LogOutIcon />  LogOut</SidebarMenuButton>
                 </SidebarMenuItem>
             </SidebarMenu>
         </SidebarFooter>
