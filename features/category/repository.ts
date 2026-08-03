@@ -18,9 +18,12 @@ export async function getAllCategories() {
     return prisma.category.findMany({
         orderBy:{
             name: "asc"
-        }, where: {
-            isActive: true
+        }, include:{
+            creator: true
         }
+        // , where: {
+        //     isActive: true
+        // }
     })
 }
 

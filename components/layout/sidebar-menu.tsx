@@ -1,6 +1,9 @@
+"use client"
+import clsx from 'clsx';
 import { SidebarMenu, SidebarMenuItem, SidebarMenuButton } from '../ui/sidebar';
 import { LayoutDashboard, Wallet, Tags, Receipt } from 'lucide-react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 export const navItems = [
   {
     title: "Dashboard",
@@ -9,26 +12,27 @@ export const navItems = [
   },
   {
     title: "Transactions",
-    href: "/transactions",
+    href: "/transaction",
     icon: Wallet,
   },
   {
     title: "Categories",
-    href: "/categories",
+    href: "/category",
     icon: Tags,
   },
   {
     title: "Receipts",
-    href: "/receipts",
+    href: "/receipt",
     icon: Receipt,
   },
 ];
 
 const SidebarMenuItems = () => {
+  const pathname = usePathname();
   return (
    <SidebarMenu>
   {navItems.map((nav) => (
-    <SidebarMenuItem key={nav.title}>
+    <SidebarMenuItem key={nav.title} className={clsx({'bg-blue-100' : pathname == nav.href})}>
       <Link
          href={nav.href} >
       <SidebarMenuButton >
