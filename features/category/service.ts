@@ -1,7 +1,7 @@
 import { ActionResult } from "@/types/action-result";
 import { requireRole} from "@/lib/role-check";
-import { createCategory, findByName, getAllCategories } from "./repository"; 
-import { CreateCategoryInput, CreateCategoryType, categoryType } from "./types";
+import { createCategory, deactivateCategory, findByName, getAllCategories, updateCategory } from "./repository"; 
+import { CreateCategoryInput, CreateCategoryType, UpdateCategoryInput, categoryType, deleteCategoryInput } from "./types";
 import { normalizeCategoryName} from "./utils";
 import { getCurrentUser } from "@/lib/current-user";
 export async function createCategoryService (data: CreateCategoryType): Promise<categoryType> {
@@ -23,21 +23,30 @@ export async function createCategoryService (data: CreateCategoryType): Promise<
 
 }
 
-export async function updateCategoryService () {
+export async function updateCategoryService (data:UpdateCategoryInput) {
+     const user = await getCurrentUser();
+    await requireRole(user,"ADMIN");
+   const categoryName = normalizeCategoryName(data.name)
+   const isExist = await findByName(categoryName)
+   if(isExist) {
+        throw new Error ("Category Already Exist")
+   }
+   return updateCategory(data)
     
 }
 
-export async function getCategoriesService (): Promise<ActionResult<categoryType[]>> {
-    const categories = await getAllCategories();
+export async function getCategoriesService (): Promise<categoryType[]> {
+    await getCurrentUser();
+   return getAllCategories();
 
-    return{
-        success: true,
-        data: categories,
-        message: "Categories fetched Successfully"
-    }
+  
 
 }
 
-export async function deactivateCategoryService () {
-    
+export async function deactivateCategoryService (id:number) {
+    const user = await getCurrentUser();
+    await requireRole(user,"ADMIN");
+
+
+    return deactivateCategory(id);
 }

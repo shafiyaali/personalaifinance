@@ -19,7 +19,7 @@ const CategoryRow = async () => {
           <TableCell>{category.createdBy}</TableCell>
           <TableCell>{category.createdAt.toISOString().split('T')[0]}</TableCell>
           <TableCell>
-            <CategorgyActionDropdown id={category.id} />
+            <CategorgyActionDropdown category={category} />
             </TableCell>
         </TableRow>
       )

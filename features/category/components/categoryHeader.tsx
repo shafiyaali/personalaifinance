@@ -1,6 +1,6 @@
 import { CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import React from 'react'
-import CategoryDialog from './categoryDialog'
+import CategoryDialog from './categoryCreateDialog'
 
 const categoryHeader = () => {
   return (

@@ -13,3 +13,7 @@ export const updateCategorySchema = categorySchema.extend({
     id: z.number()
 })
 
+export const deleteCategorySchema = z.strictObject({
+    id: z.number()
+})
+
