@@ -1,30 +1,25 @@
 import { ActionResult } from "@/types/action-result";
 import { requireRole} from "@/lib/role-check";
 import { createCategory, findByName, getAllCategories } from "./repository"; 
-import { CreateCategoryType, categoryType } from "./types";
-export async function createCategoryService (data: CreateCategoryType): Promise<ActionResult<categoryType>> {
+import { CreateCategoryInput, CreateCategoryType, categoryType } from "./types";
+import { normalizeCategoryName} from "./utils";
+import { getCurrentUser } from "@/lib/current-user";
+export async function createCategoryService (data: CreateCategoryType): Promise<categoryType> {
 
-    const user = await requireRole("admin");
-  
-   const categoryName = data.name.trim().toLowerCase()
+    
+    const user = await getCurrentUser();
+    await requireRole(user,"ADMIN");
+   const categoryName = normalizeCategoryName(data.name)
    const isExist = await findByName(categoryName)
    if(isExist) {
-    return {
-        success : false,
-        message: "Already Exist"
-    }
+        throw new Error ("Category Already Exist")
    }
    const parsedData = {
     name: categoryName,
     createdBy: user.id
    }
 
-    const category = await createCategory(parsedData);
-    return {
-        success: true,
-        data: category,
-        message:"category created successfully"
-    }
+    return createCategory(parsedData);
 
 }
 

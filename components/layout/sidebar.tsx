@@ -4,11 +4,11 @@ import { Sidebar, SidebarContent, SidebarMenu,SidebarFooter, SidebarHeader, Side
 import { Settings, User, LogOutIcon} from 'lucide-react'
 import SidebarItems from './sidebar-menu'
 import { Separator } from '../ui/separator'
-// import { getCurrentSession } from '@/lib/session'
+import { getCurrentUser } from '@/lib/current-user'
 import { SignOutAction } from '@/features/auth/actions'
 const AppSidebar = async () => {
     
-    // const session = await getCurrentSession();
+    const user = await getCurrentUser();
   return (
     <Sidebar>
         <SidebarHeader className='p-5' >AI Finance</SidebarHeader>
@@ -20,7 +20,7 @@ const AppSidebar = async () => {
         <SidebarFooter>
             <SidebarMenu>
                 <SidebarMenuItem>
-                    <SidebarMenuButton><User />Shafiya</SidebarMenuButton>
+                    <SidebarMenuButton><User />{user.name}</SidebarMenuButton>
                     <SidebarMenuButton ><Settings /> Settings</SidebarMenuButton>
                     <SidebarMenuButton onClick={SignOutAction}><LogOutIcon />  LogOut</SidebarMenuButton>
                 </SidebarMenuItem>

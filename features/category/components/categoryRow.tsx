@@ -6,7 +6,7 @@ import { getAllCategoriesAction } from '../actions'
 const CategoryRow = async () => {
 
   const categories = (await getAllCategoriesAction()).data;
-  
+
 
   return (
     <>
@@ -17,7 +17,7 @@ const CategoryRow = async () => {
           <TableCell>{category.name}</TableCell>
           <TableCell><Badge variant={'destructive'} > {category.isActive ? "Active" : "InActive"} </Badge></TableCell>
           <TableCell>{category.createdBy}</TableCell>
-          <TableCell>{category.createdAt.getDate()}</TableCell>
+          <TableCell>{category.createdAt.toISOString().split('T')[0]}</TableCell>
           <TableCell>
             <CategorgyActionDropdown id={category.id} />
             </TableCell>

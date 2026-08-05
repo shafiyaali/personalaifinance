@@ -23,6 +23,7 @@ export async function registerAction(data: RegisterForm) {
         email: validated.data.email,
         password: validated.data.password
     }
+    revalidatePath("/dashboard")
     return await registerUser(parsedData);
 
 }
@@ -36,7 +37,7 @@ export async function LoginAction(data: LoginForm) {
             message: "Validation failed"
         }
     }
-
+    revalidatePath("dashboard")
     return await SigninUser(validated.data)
 }
 
