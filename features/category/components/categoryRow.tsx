@@ -1,16 +1,15 @@
-import React from 'react'
+"use client"
 import { TableRow, TableCell } from '@/components/ui/table'
 import { Badge } from '@/components/ui/badge'
 import CategorgyActionDropdown from './categorgyActionDropDown'
-import { getAllCategoriesAction } from '../actions'
-const CategoryRow = async () => {
+import { Category } from '@/generated/prisma/client'
 
-  const categories = (await getAllCategoriesAction()).data;
+const CategoryRow = ({categories}: {categories : Category[]}) => {
 
 
   return (
     <>
-  
+   
     {categories && categories.map((category, idx) => {
       return (
          <TableRow key={idx}>

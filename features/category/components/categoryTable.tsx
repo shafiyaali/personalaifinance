@@ -1,7 +1,8 @@
 import React from 'react'
 import { Table, TableHeader, TableBody, TableHead, TableRow} from '@/components/ui/table'
 import CategoryRow from './categoryRow'
-const CategoryTable = () => {
+import { Category } from '@/generated/prisma/client'
+const CategoryTable = ({categories} : {categories: Category[] | undefined}) => {
   return (
     <>
     <Table>
@@ -15,7 +16,8 @@ const CategoryTable = () => {
       </TableRow>
     </TableHeader>
     <TableBody>
-        <CategoryRow />
+      {categories && 
+        <CategoryRow categories ={categories}/>}
     </TableBody>
 
     </Table>

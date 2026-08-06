@@ -1,20 +1,21 @@
-import React from 'react'
 import { Card } from '@/components/ui/card'
 import CategoryHeader from '@/features/category/components/categoryHeader'
 import CategoryToolbar from '@/features/category/components/categoryToolbar'
 import CategoryTable from '@/features/category/components/categoryTable'
-const page = () => {
+import { getAllCategoriesAction } from '@/features/category/actions'
+const page = async () => {
+    const categories = (await getAllCategoriesAction()).data;
   return (
-   <>
-    <Card>
+   <div className='p-2'>
+    
     
     <CategoryHeader />
 
     <CategoryToolbar />
-    <CategoryTable />
-    </Card>
+    <CategoryTable categories={categories}/>
+  
 
-   </>
+   </div>
   )
 }
 

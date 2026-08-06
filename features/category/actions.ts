@@ -1,7 +1,7 @@
 "use server"
 import { ActionResult } from "@/types/action-result";
 import { createCategoryService, getCategoriesService, updateCategoryService, deactivateCategoryService } from "./service";
-import { categoryType, CreateCategoryType, UpdateCategoryInput, deleteCategoryInput } from "./types";
+import { categoryType, CreateCategoryType, UpdateCategoryInput } from "./types";
 import { categorySchema, updateCategorySchema } from "./schemas";
 import { revalidatePath } from "next/cache";
 export async function createCategoryAction(data: CreateCategoryType):Promise<ActionResult<categoryType>>{
@@ -23,7 +23,6 @@ if(!validated.success){
          }
          
     } catch (error) {
-        console.log("Action error");
         
         return{
             success: false,
