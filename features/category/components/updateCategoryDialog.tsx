@@ -11,15 +11,21 @@ import { updateCategoryAction } from '../actions'
 import { Category } from '@/generated/prisma/client'
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button'
+import { useEffect } from 'react'
+type UpdateCategoryDialogProps = {
+    category: Category ,
+    open: boolean,
+    onOpenChange: (open : boolean) => void
+}
+const UpdateCategoryDialog = ({ category , open, onOpenChange}: UpdateCategoryDialogProps) => {
 
-const UpdateCategory = ({ category }: { category: Category }) => {
-
+    
     const form = useForm<CreateCategoryType>({
         resolver: zodResolver(categorySchema), defaultValues: {
             name: category.name
         }
     })
-    const { open, setOpen, setFormError, close, formError } = useCrudDialog(form);
+    const { setFormError, close, formError } = useCrudDialog(form);
 
     const onSubmit: SubmitHandler<CreateCategoryType> = async (data) => {
         const parsedData = {
@@ -32,21 +38,21 @@ const UpdateCategory = ({ category }: { category: Category }) => {
             setFormError(result.message)
         } else {
             close("category created successfully");
+            onOpenChange(false);
+            form.reset()
 
         }
-
-
     }
 
-    console.log("render", open);
+    useEffect(() => {
+    form.reset({
+        name: category.name
+    });
+}, [category]);
     return (
         <>
-            <Button onClick={() => setOpen(true)}>
-                Edit
-            </Button>
-
             <Dialog
-                open={open} onOpenChange={setOpen}>
+                open={open} onOpenChange={onOpenChange}>
                 <CategoryForm
                     category={category}
                     form={form}
@@ -61,4 +67,4 @@ const UpdateCategory = ({ category }: { category: Category }) => {
     )
 }
 
-export default UpdateCategory
+export default UpdateCategoryDialog

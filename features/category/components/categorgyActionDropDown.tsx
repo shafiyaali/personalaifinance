@@ -11,8 +11,14 @@ import { CreateCategoryType } from '../types'
 import { categorySchema } from '../schemas'
 import { useCrudDialog } from '@/hooks/use-form-dialog'
 import { updateCategoryAction } from '../actions'
+import { Button } from '@/components/ui/button'
 
-const CategorgyActionDropdown = ({ category }: { category: Category }) => {
+type ActionProps = {
+  category: Category,
+  onEdit : (category: Category) => void
+
+}
+const CategorgyActionDropdown = ({ category, onEdit }: ActionProps) => {
 
 
   const handledeActivate = async () => {
@@ -23,7 +29,7 @@ const CategorgyActionDropdown = ({ category }: { category: Category }) => {
               name: category.name
           }
       })
-      const { open, setOpen, setFormError, close, formError } = useCrudDialog(form);
+      const {  setFormError, close, formError } = useCrudDialog(form);
   
       const onSubmit: SubmitHandler<CreateCategoryType> = async (data) => {
           const parsedData = {
@@ -44,24 +50,11 @@ const CategorgyActionDropdown = ({ category }: { category: Category }) => {
 
   return (
     <>
-    
-   <Dialog
-                open={open} onOpenChange={setOpen}>
-                <CategoryForm
-                    category={category}
-                    form={form}
-                    onSubmit={onSubmit}
-                    formError={formError}
-
-                />
-
-
-            </Dialog>
 
     <DropdownMenu>
-      <DropdownMenuTrigger render={<EllipsisVerticalIcon />} />
+      <DropdownMenuTrigger render={<Button variant={'ghost'}><EllipsisVerticalIcon /></Button>} />
       <DropdownMenuContent>
-        <DropdownMenuItem onClick={() =>setOpen(true)}>Edit</DropdownMenuItem>
+        <DropdownMenuItem onClick={() =>onEdit(category)}>Edit</DropdownMenuItem>
         <DropdownMenuItem onClick={handledeActivate}>Deactivate</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

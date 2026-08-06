@@ -2,7 +2,12 @@ import React from 'react'
 import { Table, TableHeader, TableBody, TableHead, TableRow} from '@/components/ui/table'
 import CategoryRow from './categoryRow'
 import { Category } from '@/generated/prisma/client'
-const CategoryTable = ({categories} : {categories: Category[] | undefined}) => {
+type TableProps = {
+  categories: Category[] | undefined,
+  onEdit : (category: Category) => void
+
+}
+const CategoryTable = ({categories, onEdit} : TableProps) => {
   return (
     <>
     <Table>
@@ -16,8 +21,9 @@ const CategoryTable = ({categories} : {categories: Category[] | undefined}) => {
       </TableRow>
     </TableHeader>
     <TableBody>
-      {categories && 
-        <CategoryRow categories ={categories}/>}
+      {categories && categories.map(category => (
+          <CategoryRow key={category.id} category={category} onEdit={onEdit}/>
+      ))}
     </TableBody>
 
     </Table>

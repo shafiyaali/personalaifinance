@@ -3,26 +3,29 @@ import { TableRow, TableCell } from '@/components/ui/table'
 import { Badge } from '@/components/ui/badge'
 import CategorgyActionDropdown from './categorgyActionDropDown'
 import { Category } from '@/generated/prisma/client'
+import { formatDate } from '@/utils/formatDate'
+type RowProps = {
+  category: Category ,
+  onEdit : (category: Category) => void
 
-const CategoryRow = ({categories}: {categories : Category[]}) => {
+}
+
+const CategoryRow = ({category, onEdit}: RowProps) => {
 
 
   return (
     <>
    
-    {categories && categories.map((category, idx) => {
-      return (
-         <TableRow key={idx}>
+         <TableRow>
           <TableCell>{category.name}</TableCell>
           <TableCell><Badge variant={'destructive'} > {category.isActive ? "Active" : "InActive"} </Badge></TableCell>
           <TableCell>{category.createdBy}</TableCell>
-          <TableCell>{category.createdAt.toISOString().split('T')[0]}</TableCell>
+          <TableCell>{formatDate(category.createdAt)}</TableCell>
           <TableCell>
-            <CategorgyActionDropdown category={category} />
+            <CategorgyActionDropdown category={category} onEdit={onEdit} />
             </TableCell>
         </TableRow>
-      )
-    })}
+    
       </>
   )
 }

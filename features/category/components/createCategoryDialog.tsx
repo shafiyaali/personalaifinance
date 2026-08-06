@@ -9,13 +9,17 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useCrudDialog } from '@/hooks/use-form-dialog'
 import CategoryForm from './categoryForm'
-const CreateCategory = () => {
+type CreateCategoryDialogProps ={
+    open: boolean
+    onOpenChange: (open : boolean)=>void
+}
+const CreateCategoryDialog = ({open, onOpenChange} :CreateCategoryDialogProps) => {
  const form = useForm<CreateCategoryType>({
         resolver : zodResolver(categorySchema), defaultValues:{
             name:""
         }
     })
-    const {open, setOpen, setFormError, close, formError } = useCrudDialog(form);
+    const { setFormError, close, formError } = useCrudDialog(form);
    
     const onSubmit: SubmitHandler<CreateCategoryType> =async (data) =>{
                const result = await createCategoryAction(data);
@@ -23,8 +27,8 @@ const CreateCategory = () => {
                 if(!result.success) {
                 setFormError(result.message)
                } else {
+                onOpenChange(false)
                 close("category created successfully");
-                    
                }
         
                
@@ -32,9 +36,8 @@ const CreateCategory = () => {
   return (
 
    <Dialog 
-    open ={open} onOpenChange={setOpen}> 
+    open ={open} onOpenChange={onOpenChange}> 
        
-            <DialogTrigger render={<Button ><PlusIcon /> Add Category</Button>} />
             <CategoryForm 
                 form = {form}
                 onSubmit = {onSubmit}
@@ -46,4 +49,4 @@ const CreateCategory = () => {
   )
 }
 
-export default CreateCategory
+export default CreateCategoryDialog

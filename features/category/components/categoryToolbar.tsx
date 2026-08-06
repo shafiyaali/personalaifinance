@@ -3,7 +3,7 @@ import { ArrowDown, Search } from 'lucide-react'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import React from 'react'
 
-const categoryToolbar = () => {
+const CategoryToolbar = () => {
   return (
 <>
 
@@ -33,4 +33,4 @@ const categoryToolbar = () => {
   )
 }
 
-export default categoryToolbar
+export default CategoryToolbar
