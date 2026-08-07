@@ -8,7 +8,7 @@ export async function createCategoryService (data: CreateCategoryType): Promise<
 
     
     const user = await getCurrentUser();
-    await requireRole(user,"ADMIN");
+    await requireRole("ADMIN");
    const categoryName = normalizeCategoryName(data.name)
    const isExist = await findByName(categoryName)
    if(isExist) {
@@ -25,7 +25,7 @@ export async function createCategoryService (data: CreateCategoryType): Promise<
 
 export async function updateCategoryService (data:UpdateCategoryInput) {
      const user = await getCurrentUser();
-    await requireRole(user,"ADMIN");
+    await requireRole("ADMIN");
    const categoryName = normalizeCategoryName(data.name)
    const isExist = await findByName(categoryName)
    if(isExist) {
@@ -45,7 +45,7 @@ export async function getCategoriesService (): Promise<categoryType[]> {
 
 export async function deactivateCategoryService (id:number) {
     const user = await getCurrentUser();
-    await requireRole(user,"ADMIN");
+    await requireRole("ADMIN");
 
 
     return deactivateCategory(id);

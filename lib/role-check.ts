@@ -1,7 +1,12 @@
-import type {user } from "@/types/user" 
-export function requireRole(user: user, role: "USER" | "ADMIN"){  
+"use server"
+import { getCurrentUser } from "./current-user"
+export  async function requireRole(role: "USER" | "ADMIN"){  
+    const user = await getCurrentUser()
     if(user.role !== role) {
         throw new Error("Unauthorized")
+    } else {
+        
+    return true;
     }
 
 }

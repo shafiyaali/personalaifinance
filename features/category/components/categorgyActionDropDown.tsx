@@ -22,31 +22,34 @@ const CategorgyActionDropdown = ({ category, onEdit }: ActionProps) => {
 
 
   const handledeActivate = async () => {
+    if(confirm("Are you sure?"))
+    {  
     await deactivateCategoryAction(category.id)
+    }
   }
-   const form = useForm<CreateCategoryType>({
-          resolver: zodResolver(categorySchema), defaultValues: {
-              name: category.name
-          }
-      })
-      const {  setFormError, close, formError } = useCrudDialog(form);
+  //  const form = useForm<CreateCategoryType>({
+  //         resolver: zodResolver(categorySchema), defaultValues: {
+  //             name: category.name
+  //         }
+  //     })
+      // const {  setFormError, close, formError } = useCrudDialog(form);
   
-      const onSubmit: SubmitHandler<CreateCategoryType> = async (data) => {
-          const parsedData = {
-              name: data.name,
-              id: category.id
-          }
-          const result = await updateCategoryAction(parsedData);
+      // const onSubmit: SubmitHandler<CreateCategoryType> = async (data) => {
+      //     const parsedData = {
+      //         name: data.name,
+      //         id: category.id
+      //     }
+      //     const result = await updateCategoryAction(parsedData);
   
-          if (!result.success) {
-              setFormError(result.message)
-          } else {
-              close("Category updated successfully");
+      //     if (!result.success) {
+      //         setFormError(result.message)
+      //     } else {
+      //         close("Category updated successfully");
   
-          }
+      //     }
   
   
-      }
+      // }
 
   return (
     <>
@@ -54,8 +57,8 @@ const CategorgyActionDropdown = ({ category, onEdit }: ActionProps) => {
     <DropdownMenu>
       <DropdownMenuTrigger render={<Button variant={'ghost'}><EllipsisVerticalIcon /></Button>} />
       <DropdownMenuContent>
-        <DropdownMenuItem onClick={() =>onEdit(category)}>Edit</DropdownMenuItem>
-        <DropdownMenuItem onClick={handledeActivate}>Deactivate</DropdownMenuItem>
+        <DropdownMenuItem disabled={!category.isActive} onClick={() =>onEdit(category)}>Edit</DropdownMenuItem>
+        <DropdownMenuItem disabled={!category.isActive} onClick={handledeActivate}>Deactivate</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
     </>
