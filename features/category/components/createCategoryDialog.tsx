@@ -1,7 +1,5 @@
 "use client"
-import { Dialog,  DialogTrigger  } from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
-import { PlusIcon } from 'lucide-react'
+import { Dialog } from '@/components/ui/dialog'
 import { createCategoryAction } from '../actions'
 import { CreateCategoryType } from '../types'
 import { categorySchema } from '../schemas'

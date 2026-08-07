@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { CreateCategoryInput, deleteCategoryInput, UpdateCategoryInput } from "./types";
+import { CreateCategoryInput, UpdateCategoryInput } from "./types";
 export async function createCategory(data: CreateCategoryInput) {
     
     return prisma.category.create({
@@ -21,9 +21,6 @@ export async function getAllCategories() {
         }, include:{
             creator: true
         }
-        // , where: {
-        //     isActive: true
-        // }
     })
 }
 

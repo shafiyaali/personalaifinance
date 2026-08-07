@@ -1,6 +1,5 @@
 "use client"
 import { Dialog } from '@/components/ui/dialog'
-// import { Button } from '@/components/ui/button'
 import CategoryForm from './categoryForm'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -9,8 +8,6 @@ import { categorySchema } from '../schemas'
 import { useCrudDialog } from '@/hooks/use-form-dialog'
 import { updateCategoryAction } from '../actions'
 import { Category } from '@/generated/prisma/client'
-import { DropdownMenuItem } from '@/components/ui/dropdown-menu'
-import { Button } from '@/components/ui/button'
 import { useEffect } from 'react'
 type UpdateCategoryDialogProps = {
     category: Category ,

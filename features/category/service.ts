@@ -1,7 +1,7 @@
-import { ActionResult } from "@/types/action-result";
+
 import { requireRole} from "@/lib/role-check";
 import { createCategory, deactivateCategory, findByName, getAllCategories, updateCategory } from "./repository"; 
-import { CreateCategoryInput, CreateCategoryType, UpdateCategoryInput, categoryType, deleteCategoryInput } from "./types";
+import { CreateCategoryType, UpdateCategoryInput, categoryType } from "./types";
 import { normalizeCategoryName} from "./utils";
 import { getCurrentUser } from "@/lib/current-user";
 export async function createCategoryService (data: CreateCategoryType): Promise<categoryType> {
@@ -24,7 +24,7 @@ export async function createCategoryService (data: CreateCategoryType): Promise<
 }
 
 export async function updateCategoryService (data:UpdateCategoryInput) {
-     const user = await getCurrentUser();
+    await getCurrentUser();
     await requireRole("ADMIN");
    const categoryName = normalizeCategoryName(data.name)
    const isExist = await findByName(categoryName)
@@ -44,7 +44,7 @@ export async function getCategoriesService (): Promise<categoryType[]> {
 }
 
 export async function deactivateCategoryService (id:number) {
-    const user = await getCurrentUser();
+    await getCurrentUser();
     await requireRole("ADMIN");
 
 
