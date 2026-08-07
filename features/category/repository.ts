@@ -46,7 +46,7 @@ export async function findByName(name: string){
 
 }
 
-export async function findById(id:number){
+export function findCategoryById(id:number){
     return prisma.category.findUnique({
         where: {id }
     })

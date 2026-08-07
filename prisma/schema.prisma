@@ -16,11 +16,7 @@ enum Role {
 model User {
   id              String        @id @default(uuid())
   email           String        @unique
-  // firstName       String
-  // lastName        String
-  // password        String
   role            Role          @default(USER)
-  // emailVerifiedAt DateTime?
   phone           String?
   country         String?
   currency        String        @default("USD")
@@ -67,6 +63,10 @@ model Transaction {
   categoryId      Int
   category        Category        @relation(fields: [categoryId], references: [id])
   receipt         Receipt?
+
+  @@index([userId])
+  @@index([categoryId])
+  @@index([transactionDate])
 }
 
 enum ReceiptStatus {

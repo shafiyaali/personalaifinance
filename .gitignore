@@ -52,7 +52,6 @@ next-env.d.ts
 skills-lock.json
 
 
-/features/transaction
 /features/dashboard
 
 /features/recipt
