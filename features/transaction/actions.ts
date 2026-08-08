@@ -1,11 +1,12 @@
+"use server"
 import { revalidatePath } from "next/cache";
-import { createTransactionSchema } from "./schemas";
-import { createTransactionService, getTransactionService } from "./service";
+import { createTransactionSchema, updateTransactionSchema } from "./schemas";
+import { createTransactionService, getTransactionService, updateTransactionService } from "./service";
 import { CreateTransactionType, UpdateTransactionType } from "./types";
 import { ActionResult } from "@/types/action-result";
 import { Transaction } from "@/generated/prisma/client";
 
-export async function createTransactionAction(data: CreateTransactionType): Promise<ActionResult<Transaction>>{
+export async function createTransactionAction(data: CreateTransactionType): Promise<ActionResult>{
 
     const validated = createTransactionSchema.safeParse(data);
     if(!validated.success){
@@ -55,8 +56,8 @@ export async function getTransactionAction():Promise<ActionResult<Transaction[]>
         }
 }
 
-export async function updateTransactionAction(data:UpdateTransactionType): Promise<ActionResult<Transaction>> {
-    const validated = createTransactionSchema.safeParse(data);
+export async function updateTransactionAction(data:UpdateTransactionType): Promise<ActionResult> {
+    const validated = updateTransactionSchema.safeParse(data);
     if(!validated.success){
         return {
                 success: false,
@@ -65,7 +66,7 @@ export async function updateTransactionAction(data:UpdateTransactionType): Promi
             }
         }
         try {
-            await createTransactionService(validated.data) 
+            await updateTransactionService(validated.data) 
             revalidatePath("/transaction")
             return {
                 success: true,

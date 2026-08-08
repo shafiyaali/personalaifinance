@@ -65,8 +65,8 @@ model Transaction {
   receipt         Receipt?
 
   @@index([userId])
-  @@index([categoryId])
-  @@index([transactionDate])
+  @@index([userId,categoryId])
+  @@index([userId,transactionDate])
 }
 
 enum ReceiptStatus {

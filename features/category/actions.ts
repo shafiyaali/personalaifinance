@@ -34,7 +34,7 @@ if(!validated.success){
 
 }
 
-export async function getAllCategoriesAction(){
+export async function getAllCategoriesAction():Promise<ActionResult<categoryType []>>{
 try {
      const categories = await getCategoriesService();
     
