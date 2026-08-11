@@ -8,4 +8,5 @@ export type TransactionDTO = {
   transactionDate: string
   description: string | null
   categoryId: number
+  categoryName: string
 }

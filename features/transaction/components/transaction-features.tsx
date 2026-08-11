@@ -25,7 +25,6 @@ const TransactionFeatures = ({transactions, categories} : TransactionFeatureProp
     <TransactionToolbar />
     <TransactionTable 
         transactions = {transactions}
-        categories = {categories}
          onEdit={(transaction)=> {
         setSelectedTransaction(transaction)
         setEditOpen(true)

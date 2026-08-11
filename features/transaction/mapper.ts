@@ -1,6 +1,6 @@
-import { Transaction } from "@/generated/prisma/client"
 import { TransactionDTO } from "./types/dto"
-export function toTransactionDTO(transaction: Transaction): TransactionDTO {
+import { transactionWithCategory } from "./types"
+export function  toTransactionDTO(transaction: transactionWithCategory): TransactionDTO {
   return {
     id: transaction.id,
     type: transaction.type,
@@ -9,5 +9,6 @@ export function toTransactionDTO(transaction: Transaction): TransactionDTO {
     transactionDate: transaction.transactionDate.toISOString(),
     description: transaction.description,
     categoryId: transaction.categoryId,
+    categoryName: transaction.category.name
   }
 }

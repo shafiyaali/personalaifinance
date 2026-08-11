@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { CreateTransactionType, UpdateTransactionType } from "./types";
-
+import { Prisma } from "@/generated/prisma/client";
 export function createTransaction(userId: string, data: CreateTransactionType) {
     return prisma.transaction.create({
         data: {
@@ -20,18 +20,11 @@ export function updateTransaction(data: UpdateTransactionType) {
 export function getTransactions(userId: string) {
     return prisma.transaction.findMany({
         where: { userId },
-        // select: {
-        //     id: true,
-        //     type: true,
-        //     amount: true,
-        //     merchantName: true,
-        //     transactionDate: true,
-        //     description: true,
-        //     categoryId: true,
-        // },
+
         orderBy: {
             transactionDate: "desc"
-        }
+        },
+        ...transactionWithCategory
     })
 }
 
@@ -51,3 +44,21 @@ export function deleteTransaction(id: string) {
         where: { id }
     })
 }
+
+export const transactionWithCategory = {
+  select: {
+    id: true,
+    type: true,
+    amount: true,
+    merchantName: true,
+    transactionDate: true,
+    description: true,
+    categoryId: true,
+    category: {
+        select: {
+            name: true
+        } 
+    },
+  },
+} satisfies Prisma.TransactionFindManyArgs;
+

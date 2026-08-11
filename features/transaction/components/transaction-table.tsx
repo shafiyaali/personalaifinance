@@ -1,17 +1,14 @@
 import { Table, TableHead, TableHeader, TableRow, TableBody, TableCell } from '@/components/ui/table'
-import { categoryType } from '@/features/category/types'
 import { Transaction } from '@/generated/prisma/client'
-import { formatDate } from '@/utils/formatDate'
 import React from 'react'
 import TransactionRow from './transaction-row'
 import { TransactionDTO } from '../types/dto'
 
 type TableProps = {
   transactions: TransactionDTO[] | undefined,
-  categories : categoryType[] | undefined,
   onEdit : (transaction: Transaction) => void,
  }
-const TransactionTable = ({transactions, categories, onEdit} : TableProps) => {
+const TransactionTable = ({transactions,  onEdit} : TableProps) => {
   return (
     <Table>
         <TableHeader>
@@ -21,6 +18,7 @@ const TransactionTable = ({transactions, categories, onEdit} : TableProps) => {
                 <TableHead>Catgegory</TableHead>
                 <TableHead>Type</TableHead>
                 <TableHead>Amount</TableHead>
+                <TableHead>Actions</TableHead>
             </TableRow>
         </TableHeader>
         <TableBody>
@@ -33,7 +31,7 @@ const TransactionTable = ({transactions, categories, onEdit} : TableProps) => {
                         {transactions && transactions.map( transaction => (
                             <TransactionRow key={transaction.id}
                             transaction={transaction}
-                            categories = {categories} />
+                             />
                         ))}
 
         </TableBody>
