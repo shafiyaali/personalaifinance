@@ -4,9 +4,10 @@ import { Transaction } from '@/generated/prisma/client'
 import { formatDate } from '@/utils/formatDate'
 import React from 'react'
 import TransactionRow from './transaction-row'
+import { TransactionDTO } from '../types/dto'
 
 type TableProps = {
-  transactions: Transaction[] | undefined,
+  transactions: TransactionDTO[] | undefined,
   categories : categoryType[] | undefined,
   onEdit : (transaction: Transaction) => void,
  }

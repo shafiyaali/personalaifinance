@@ -7,13 +7,11 @@ import React from 'react'
 const page = async () => {
 
   const transactions = (await getTransactionAction()).data;
-  // const user = await getCurrentUser();
   const categories = (await getAllCategoriesAction()).data;
   return (
   <TransactionFeatures 
   transactions = {transactions}
   categories = {categories}
-  // user={user}
   />
   )
 }

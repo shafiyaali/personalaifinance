@@ -5,7 +5,8 @@ import { createTransactionService, getTransactionService, updateTransactionServi
 import { CreateTransactionType, UpdateTransactionType } from "./types";
 import { ActionResult } from "@/types/action-result";
 import { Transaction } from "@/generated/prisma/client";
-
+import { TransactionDTO } from "./types/dto";
+import { toTransactionDTO } from "./mapper";
 export async function createTransactionAction(data: CreateTransactionType): Promise<ActionResult>{
 
     const validated = createTransactionSchema.safeParse(data);
@@ -35,11 +36,10 @@ export async function createTransactionAction(data: CreateTransactionType): Prom
 
 }
 
-export async function getTransactionAction():Promise<ActionResult<Transaction[]>> {
+export async function getTransactionAction():Promise<ActionResult<TransactionDTO[]>> {
     
         try {
             const transactions = await getTransactionService() 
-            
             return {
                 success: true,
                 data: transactions,

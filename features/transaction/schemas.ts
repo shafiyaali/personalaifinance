@@ -8,12 +8,14 @@ export const createTransactionSchema = z.strictObject({
     merchantName: z.string().trim().max(50, {
         message: "Merchant name must be maximum of 50 characters"
     }).optional(),
-    transactionDate: z.date(),
+    transactionDate: z.date({
+        message:"Please select a corrent date"
+    }),
     description: z.string().trim().max(200, {
         message: "Description must be maximum of 200 characters"
     }).optional(),
     categoryId: z.number().int().positive({
-        message: "Select a category"
+        message: "Select an active category"
     })
 });
 

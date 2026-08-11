@@ -2,6 +2,7 @@ import { getCurrentUser } from "@/lib/current-user";
 import { CreateTransactionType, UpdateTransactionType } from "./types";
 import { findCategoryById } from "../category/repository";
 import { createTransaction, deleteTransaction, findTransactionById, getTransactions, updateTransaction } from "./repository";
+import { toTransactionDTO } from "./mapper";
 
 export async function createTransactionService(data: CreateTransactionType){
     const user =await getCurrentUser();
@@ -39,7 +40,8 @@ export async function updateTransactionService(data:UpdateTransactionType) {
 
 export async function getTransactionService(){
     const user = await getCurrentUser()
-    return getTransactions(user.id)
+    const transactions = await getTransactions(user.id)
+    return transactions.map(transaction => toTransactionDTO(transaction))
 }
 
 export async function deleteTransactionService(id: string) {

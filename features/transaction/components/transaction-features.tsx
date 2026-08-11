@@ -8,8 +8,9 @@ import TransactionTable from './transaction-table'
 import CreateTransactionDialog from './create-transaction-dialog';
 import UpdateTransactionDialog from './update-transaction-dialog';
 import { categoryType } from '@/features/category/types';
+import { TransactionDTO } from '../types/dto';
 type TransactionFeatureProps = {
-    transactions: Transaction[] |undefined,
+    transactions: TransactionDTO[] |undefined,
     categories: categoryType[] | undefined
 }
 const TransactionFeatures = ({transactions, categories} : TransactionFeatureProps) => {

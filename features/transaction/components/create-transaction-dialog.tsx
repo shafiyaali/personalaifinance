@@ -3,12 +3,12 @@ import { Dialog } from '@/components/ui/dialog'
 import { createTransactionAction } from '../actions'
 import { CreateTransactionType } from '../types'
 import { createTransactionSchema} from '../schemas'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { useForm, SubmitHandler, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useCrudDialog } from '@/hooks/use-form-dialog'
 import TransactionForm from './transaction-form'
 import { categoryType } from '@/features/category/types'
-
+// import {toast} from "sooner";
 type CreateTransactionDialogProps ={
     categories: categoryType[] | undefined
     open: boolean
@@ -16,15 +16,15 @@ type CreateTransactionDialogProps ={
 }
 const CreateTransactionDialog = ({categories, open, onOpenChange} :CreateTransactionDialogProps) => {
     const form = useForm<CreateTransactionType>({
-        resolver: zodResolver(createTransactionSchema), defaultValues:{
+        resolver: zodResolver(createTransactionSchema), 
+        defaultValues:{
             type:"INCOME",
-             amount: 1,
-      transactionDate: new Date(),
-      categoryId: undefined, 
-      merchantName: "",
-      description: ""
+            amount: undefined,
+            transactionDate: new Date(),
+            categoryId: undefined, 
+            merchantName: "",
+            description: ""
         }
-
     }
         
     )
@@ -32,6 +32,8 @@ const CreateTransactionDialog = ({categories, open, onOpenChange} :CreateTransac
     const { setFormError, close, formError } = useCrudDialog(form);
    
     const onSubmit: SubmitHandler<CreateTransactionType> =async (data) =>{
+        console.log("data",data);
+        
                const result = await createTransactionAction(data);
     
                 if(!result.success) {
