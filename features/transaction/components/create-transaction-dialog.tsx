@@ -3,7 +3,7 @@ import { Dialog } from '@/components/ui/dialog'
 import { createTransactionAction } from '../actions'
 import { CreateTransactionType } from '../types'
 import { createTransactionSchema} from '../schemas'
-import { useForm, SubmitHandler, Controller } from 'react-hook-form'
+import { useForm, SubmitHandler  } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useCrudDialog } from '@/hooks/use-form-dialog'
 import TransactionForm from './transaction-form'
@@ -32,7 +32,6 @@ const CreateTransactionDialog = ({categories, open, onOpenChange} :CreateTransac
     const { setFormError, close, formError } = useCrudDialog(form);
    
     const onSubmit: SubmitHandler<CreateTransactionType> =async (data) =>{
-        console.log("data",data);
         
                const result = await createTransactionAction(data);
     
@@ -51,6 +50,7 @@ const CreateTransactionDialog = ({categories, open, onOpenChange} :CreateTransac
     open ={open} onOpenChange={onOpenChange}> 
        
             <TransactionForm 
+            mode='create'
                 form = {form}
                 onSubmit = {onSubmit}
                 formError = {formError}

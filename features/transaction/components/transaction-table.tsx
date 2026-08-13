@@ -1,12 +1,11 @@
 import { Table, TableHead, TableHeader, TableRow, TableBody, TableCell } from '@/components/ui/table'
-import { Transaction } from '@/generated/prisma/client'
 import React from 'react'
 import TransactionRow from './transaction-row'
 import { TransactionDTO } from '../types/dto'
 
 type TableProps = {
   transactions: TransactionDTO[] | undefined,
-  onEdit : (transaction: Transaction) => void,
+  onEdit : (transaction: TransactionDTO) => void,
  }
 const TransactionTable = ({transactions,  onEdit} : TableProps) => {
   return (
@@ -31,6 +30,7 @@ const TransactionTable = ({transactions,  onEdit} : TableProps) => {
                         {transactions && transactions.map( transaction => (
                             <TransactionRow key={transaction.id}
                             transaction={transaction}
+                            onEdit={onEdit}
                              />
                         ))}
 

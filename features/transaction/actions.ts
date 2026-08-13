@@ -1,12 +1,10 @@
 "use server"
 import { revalidatePath } from "next/cache";
 import { createTransactionSchema, updateTransactionSchema } from "./schemas";
-import { createTransactionService, getTransactionService, updateTransactionService } from "./service";
+import { createTransactionService, deleteTransactionService, getTransactionService, updateTransactionService } from "./service";
 import { CreateTransactionType, UpdateTransactionType } from "./types";
 import { ActionResult } from "@/types/action-result";
-import { Transaction } from "@/generated/prisma/client";
 import { TransactionDTO } from "./types/dto";
-import { toTransactionDTO } from "./mapper";
 export async function createTransactionAction(data: CreateTransactionType): Promise<ActionResult>{
 
     const validated = createTransactionSchema.safeParse(data);
@@ -71,6 +69,25 @@ export async function updateTransactionAction(data:UpdateTransactionType): Promi
             return {
                 success: true,
                 message: "Transaction updated successfully"
+            }
+             
+        } catch (error) {
+            
+            return{
+                success: false,
+                message: error instanceof Error ? error.message : "Something went wrong",
+                
+            }
+        }
+}
+
+export async function deleteTransactionAction(id:string): Promise<ActionResult> {
+    try {
+            await deleteTransactionService(id) 
+            revalidatePath("/transaction")
+            return {
+                success: true,
+                message: "Transaction deleted successfully"
             }
              
         } catch (error) {

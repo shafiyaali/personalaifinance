@@ -1,7 +1,5 @@
 "use client";
 import React , {useState} from 'react'
-import { Transaction } from '@/generated/prisma/client'
-import { AppUser } from '@/types/AppUser'
 import TransactionHeader from './transaction-header'
 import TransactionToolbar from './transaction-toolbar'
 import TransactionTable from './transaction-table'
@@ -15,7 +13,7 @@ type TransactionFeatureProps = {
 }
 const TransactionFeatures = ({transactions, categories} : TransactionFeatureProps) => {
     
-    const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null);
+    const [selectedTransaction, setSelectedTransaction] = useState<TransactionDTO>();
     const [editOpen, setEditOpen] = useState(false);
     const [createOpen, setCreateOpen] = useState(false)
   return (
@@ -35,11 +33,16 @@ const TransactionFeatures = ({transactions, categories} : TransactionFeatureProp
         open = {createOpen}
         onOpenChange = {setCreateOpen}
     />
-    {/* <UpdateTransactionDialog 
-        editOpen={editOpen}
-            setEditOpen={setEditOpen}
+    {selectedTransaction &&
+       <UpdateTransactionDialog 
+    categories={categories}
+        open={editOpen}
+            onOpenChange={setEditOpen}
             selectedTransaction ={selectedTransaction}
-    /> */}
+    />
+
+    }
+   
     </>
    
   )

@@ -1,37 +1,29 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose, } from '@/components/ui/dialog'
-import { CreateTransactionType } from '../types'
+import { CreateTransactionType  } from '../types'
 import { Controller, SubmitHandler, UseFormReturn } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import {
   Field, FieldGroup, FieldError, FieldLabel, FieldSet, FieldLegend,
-  FieldTitle, FieldDescription, FieldContent
+  FieldTitle, FieldContent
 } from '@/components/ui/field'
-import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
-import { InputGroup, InputGroupAddon, InputGroupText, InputGroupTextarea } from '@/components/ui/input-group';
-import { Transaction } from '@/generated/prisma/client';
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { categoryType } from '@/features/category/types';
-import { Select, SelectItem, SelectLabel, SelectTrigger, SelectValue, SelectGroup, SelectContent, SelectSeparator } from '@/components/ui/select';
-import { Separator } from '@/components/ui/separator';
+import { Select, SelectItem,  SelectTrigger, SelectValue, SelectContent } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 type TransactionFormProps = {
+  mode: string,
   categories: categoryType[] | undefined,
-  transaction?: Transaction,
   form: UseFormReturn<CreateTransactionType>,
   onSubmit: SubmitHandler<CreateTransactionType>,
   formError?: string
 }
-type categorySelectItem = {
-    label: string,
-    value: number
-}
 const TransactionForm = (
-  { categories, transaction, form, onSubmit, formError }: TransactionFormProps
+  {mode, categories, form, onSubmit, formError }: TransactionFormProps
 ) => {
 
-  const isEdit = !!transaction;
+  const isEdit = mode == "edit" ? true : false;
 
   const categoryItems = categories?.map((category) => ({
     label: category.name,
@@ -161,23 +153,7 @@ const TransactionForm = (
             />
           </FieldGroup>
           <FieldGroup>
-            {/* <Controller
-              name="amount"
-              control={form.control}
-              render={({ field, fieldState }) => (
-                <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor={field.name}>Amount</FieldLabel>
-                  <Input
-                    {...field}
-                    id={field.name}
-                    type='number'
-                    aria-invalid={fieldState.invalid}
-                  
-                  />
-                  {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-                </Field>
-              )}
-            /> */}
+
             <FieldLabel>Amount</FieldLabel>
             <Input 
             {...form.register("amount", {
