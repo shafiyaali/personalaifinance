@@ -1,6 +1,6 @@
 import React from 'react'
 import { DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose, } from '@/components/ui/dialog'
-import { CreateTransactionType  } from '../types'
+import { CreateTransactionType, UpdateTransactionType  } from '../types'
 import { Controller, SubmitHandler, UseFormReturn } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import {
@@ -13,7 +13,7 @@ import { categoryType } from '@/features/category/types';
 import { Select, SelectItem,  SelectTrigger, SelectValue, SelectContent } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 type TransactionFormProps = {
-  mode: string,
+  mode: "create" | "edit",
   categories: categoryType[] | undefined,
   form: UseFormReturn<CreateTransactionType>,
   onSubmit: SubmitHandler<CreateTransactionType>,
@@ -39,7 +39,9 @@ const TransactionForm = (
   return (
     <>
       <DialogContent className="sm:max-w-sm">
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+        <form onSubmit={form.handleSubmit(onSubmit,(errors) => {
+          console.log("Form Validation err",errors)
+        })} className="space-y-2">
           <DialogHeader className='text-center'>
             <DialogTitle>{title}</DialogTitle>
           </DialogHeader>
@@ -161,8 +163,11 @@ const TransactionForm = (
             })}
               type='number'
               step={'any'}
+            autoComplete=''
             />
+             <FieldError>{form.formState.errors.amount?.message}</FieldError>
           </FieldGroup>
+          <FieldGroup>
           <Controller
             name="transactionDate"
             control={form.control}
@@ -196,7 +201,8 @@ const TransactionForm = (
               </Field>
             )}
           />
-
+          </FieldGroup>
+<FieldGroup>
           <Controller
             name="description"
             control={form.control}
@@ -215,7 +221,7 @@ const TransactionForm = (
               </Field>
             )}
           />
-
+          </FieldGroup>
           <FieldError >{formError}</FieldError>
 
 

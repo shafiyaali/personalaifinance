@@ -33,7 +33,6 @@ const TransactionFeatures = ({transactions, categories} : TransactionFeatureProp
         open = {createOpen}
         onOpenChange = {setCreateOpen}
     />
-    {selectedTransaction &&
        <UpdateTransactionDialog 
     categories={categories}
         open={editOpen}
@@ -41,7 +40,6 @@ const TransactionFeatures = ({transactions, categories} : TransactionFeatureProp
             selectedTransaction ={selectedTransaction}
     />
 
-    }
    
     </>
    

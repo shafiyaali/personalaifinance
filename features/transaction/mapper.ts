@@ -1,5 +1,5 @@
 import { TransactionDTO } from "./types/dto"
-import { transactionWithCategory, UpdateTransactionType } from "./types"
+import { CreateTransactionType, transactionWithCategory, UpdateTransactionType } from "./types"
 export function  toTransactionDTO(transaction: transactionWithCategory): TransactionDTO {
   return {
     id: transaction.id,
@@ -13,9 +13,9 @@ export function  toTransactionDTO(transaction: transactionWithCategory): Transac
   }
 }
 
-export function toUpdateTransactionForm(transaction: TransactionDTO): UpdateTransactionType {
+export function toUpdateTransactionForm(transaction: TransactionDTO): CreateTransactionType {
   return {
-    id: transaction.id,
+    // id: transaction.id,
     type: transaction.type,
     amount: Number(transaction.amount),
     merchantName: transaction.merchantName ?? undefined,
