@@ -1,6 +1,6 @@
 import React from 'react'
 import { DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose, } from '@/components/ui/dialog'
-import { CreateTransactionType, UpdateTransactionType  } from '../types'
+import { CreateTransactionType  } from '../types'
 import { Controller, SubmitHandler, UseFormReturn } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import {

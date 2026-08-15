@@ -1,5 +1,5 @@
 import { TransactionDTO } from "./types/dto"
-import { CreateTransactionType, transactionWithCategory, UpdateTransactionType } from "./types"
+import { CreateTransactionType, transactionWithCategory} from "./types"
 export function  toTransactionDTO(transaction: transactionWithCategory): TransactionDTO {
   return {
     id: transaction.id,

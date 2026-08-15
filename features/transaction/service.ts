@@ -1,9 +1,10 @@
 import { getCurrentUser } from "@/lib/current-user";
-import { CreateTransactionType, UpdateTransactionType } from "./types";
+import { CreateTransactionType, TransactionQueryParamsTypes, UpdateTransactionType } from "./types";
 import { findCategoryById } from "../category/repository";
-import { createTransaction, deleteTransaction, findTransactionById, getTransactions, updateTransaction } from "./repository";
+import { countTransactions, createTransaction, deleteTransaction, findTransactionById, getTransactions, updateTransaction } from "./repository";
 import { toTransactionDTO } from "./mapper";
 
+import { PaginatedTransactionsTypes } from "./types";
 export async function createTransactionService(data: CreateTransactionType){
     const user =await getCurrentUser();
     const category = await findCategoryById(data.categoryId)
@@ -38,10 +39,22 @@ export async function updateTransactionService(data:UpdateTransactionType) {
     return updateTransaction(data)
 }
 
-export async function getTransactionService(){
-    const user = await getCurrentUser()
-    const transactions = await getTransactions(user.id)
-    return transactions.map(transaction => toTransactionDTO(transaction))
+export async function getTransactionService(filters: TransactionQueryParamsTypes) : Promise<PaginatedTransactionsTypes>{
+
+    const user = await getCurrentUser();
+    const skip = (filters.page - 1) * filters.pageSize;
+    const take = (filters.page) * filters.pageSize;
+    const [transactions, totalTransactions ]= await Promise.all([getTransactions(user.id, filters, skip, take ), countTransactions(user.id, filters)]);
+    const DTOTransactions = transactions.map(transaction => toTransactionDTO(transaction));
+
+    return {
+        items : DTOTransactions, pagination : {
+           page:  filters.page,
+           pageSize: filters.pageSize,
+           total: totalTransactions,
+           totalPages: Math.floor(totalTransactions/filters.pageSize)
+    }
+}
 }
 
 export async function deleteTransactionService(id: string) {

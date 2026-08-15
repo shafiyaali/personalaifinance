@@ -1,8 +1,8 @@
 "use server"
 import { revalidatePath } from "next/cache";
-import { createTransactionSchema, updateTransactionSchema } from "./schemas";
+import { createTransactionSchema, TransactionQueryParamsSchema, updateTransactionSchema } from "./schemas";
 import { createTransactionService, deleteTransactionService, getTransactionService, updateTransactionService } from "./service";
-import { CreateTransactionType, UpdateTransactionType } from "./types";
+import { CreateTransactionType, PaginatedTransactionsTypes, TransactionQueryParamsTypes, UpdateTransactionType } from "./types";
 import { ActionResult } from "@/types/action-result";
 import { TransactionDTO } from "./types/dto";
 export async function createTransactionAction(data: CreateTransactionType): Promise<ActionResult>{
@@ -34,13 +34,23 @@ export async function createTransactionAction(data: CreateTransactionType): Prom
 
 }
 
-export async function getTransactionAction():Promise<ActionResult<TransactionDTO[]>> {
-    
+export async function getTransactionAction(filters: TransactionQueryParamsTypes):Promise<ActionResult<PaginatedTransactionsTypes>> {
+
+const validated = TransactionQueryParamsSchema.safeParse(filters);
+    if(!validated.success){
+      return {
+                success: false,
+                errors : validated.error.flatten().fieldErrors,
+                message: "Unrecognized query params"
+            }
+    }
+
+
         try {
-            const transactions = await getTransactionService() 
+            const {items, pagination} = await getTransactionService(filters) 
             return {
                 success: true,
-                data: transactions,
+                data: {items: items, pagination: pagination},
                 message: "Transaction fetched successfully"
             }
              

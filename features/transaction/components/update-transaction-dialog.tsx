@@ -6,12 +6,10 @@ import TransactionForm from './transaction-form'
 import { useForm , SubmitHandler} from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { CreateTransactionType, UpdateTransactionType } from '../types'
-import { createTransactionSchema, updateTransactionSchema } from '../schemas'
+import { createTransactionSchema } from '../schemas'
 import { toUpdateTransactionForm } from '../mapper'
 import { useCrudDialog } from '@/hooks/use-form-dialog'
 import { updateTransactionAction } from '../actions'
-import { updateCategorySchema } from '@/features/category/schemas'
-import { CreateCategoryType } from '@/features/category/types'
 type UpdateTransactionDialogProps = {
   categories: Category[] |undefined,
   open: boolean,
@@ -34,7 +32,7 @@ const UpdateTransactionDialog = ({categories, open, onOpenChange, selectedTransa
               console.log("data",data);
               if(!selectedTransaction) 
                 return;
-              
+
                 const updateData : UpdateTransactionType = {
                 id: selectedTransaction.id,
                 ...data

@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { string, z } from "zod";
 
 export const createTransactionSchema = z.strictObject({
     type: z.enum(["INCOME", "EXPENSE"]), 
@@ -22,3 +22,11 @@ export const createTransactionSchema = z.strictObject({
 export const updateTransactionSchema = createTransactionSchema.extend({
     id: z.string()
 });
+
+export const TransactionQueryParamsSchema = z.strictObject({
+    page : z.coerce.number(),
+    pageSize: z.coerce.number(),
+    search : z.string().optional(),
+    type: z.enum(["INCOME", "EXPENSE"]).optional(),
+    categoryId: z.coerce.number().optional(),
+})
