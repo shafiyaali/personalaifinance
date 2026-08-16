@@ -4,7 +4,6 @@ import { createTransactionSchema, TransactionQueryParamsSchema, updateTransactio
 import { createTransactionService, deleteTransactionService, getTransactionService, updateTransactionService } from "./service";
 import { CreateTransactionType, PaginatedTransactionsTypes, TransactionQueryParamsTypes, UpdateTransactionType } from "./types";
 import { ActionResult } from "@/types/action-result";
-import { TransactionDTO } from "./types/dto";
 export async function createTransactionAction(data: CreateTransactionType): Promise<ActionResult>{
 
     const validated = createTransactionSchema.safeParse(data);
@@ -47,7 +46,7 @@ const validated = TransactionQueryParamsSchema.safeParse(filters);
 
 
         try {
-            const {items, pagination} = await getTransactionService(filters) 
+            const {items, pagination} = await getTransactionService(validated.data) 
             return {
                 success: true,
                 data: {items: items, pagination: pagination},

@@ -43,7 +43,7 @@ export async function getTransactionService(filters: TransactionQueryParamsTypes
 
     const user = await getCurrentUser();
     const skip = (filters.page - 1) * filters.pageSize;
-    const take = (filters.page) * filters.pageSize;
+    const take = filters.pageSize;
     const [transactions, totalTransactions ]= await Promise.all([getTransactions(user.id, filters, skip, take ), countTransactions(user.id, filters)]);
     const DTOTransactions = transactions.map(transaction => toTransactionDTO(transaction));
 
@@ -52,7 +52,7 @@ export async function getTransactionService(filters: TransactionQueryParamsTypes
            page:  filters.page,
            pageSize: filters.pageSize,
            total: totalTransactions,
-           totalPages: Math.floor(totalTransactions/filters.pageSize)
+           totalPages: Math.ceil(totalTransactions/filters.pageSize)
     }
 }
 }

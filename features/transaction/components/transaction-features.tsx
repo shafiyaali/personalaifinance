@@ -7,11 +7,14 @@ import CreateTransactionDialog from './create-transaction-dialog';
 import UpdateTransactionDialog from './update-transaction-dialog';
 import { categoryType } from '@/features/category/types';
 import { TransactionDTO } from '../types/dto';
+import TransactionPagination from './transaction-pagination';
+import { PaginationType } from '@/types/Pagination';
 type TransactionFeatureProps = {
     transactions: TransactionDTO[] |undefined,
-    categories: categoryType[] | undefined
+    categories: categoryType[] | undefined,
+    pagination: PaginationType | undefined
 }
-const TransactionFeatures = ({transactions, categories} : TransactionFeatureProps) => {
+const TransactionFeatures = ({transactions, categories, pagination} : TransactionFeatureProps) => {
     
     const [selectedTransaction, setSelectedTransaction] = useState<TransactionDTO>();
     const [editOpen, setEditOpen] = useState(false);
@@ -20,7 +23,7 @@ const TransactionFeatures = ({transactions, categories} : TransactionFeatureProp
     <>
          <TransactionHeader 
     onCreate = {() => setCreateOpen(true)}/>
-    <TransactionToolbar />
+    <TransactionToolbar categories={categories} />
     <TransactionTable 
         transactions = {transactions}
          onEdit={(transaction)=> {
@@ -39,9 +42,14 @@ const TransactionFeatures = ({transactions, categories} : TransactionFeatureProp
             onOpenChange={setEditOpen}
             selectedTransaction ={selectedTransaction}
     />
+{pagination &&
+  <TransactionPagination 
+    pagination = {pagination}/>
 
    
-    </>
+   
+}
+     </>
    
   )
 }

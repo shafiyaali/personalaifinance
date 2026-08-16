@@ -19,16 +19,19 @@ export default async function Page (props: {
     search: searchParams?.search,
     type: searchParams?.type || undefined,
     page: searchParams?.page || 1,
-    pageSize: searchParams?.pageSize || 10
+    pageSize: searchParams?.pageSize || 5
   }
 
-  const transactions = (await getTransactionAction(filters)).data?.items;
+  const transactionsDetails = (await getTransactionAction(filters)).data;
+  const transactions = transactionsDetails?.items;
+  const pagination = transactionsDetails?.pagination;
   const categories = (await getAllCategoriesAction()).data;
 
   return (
   <TransactionFeatures 
   transactions = {transactions}
   categories = {categories}
+  pagination = {pagination}
   />
   )
 }

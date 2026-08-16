@@ -30,9 +30,6 @@ export function getTransactions(userId: string, filters: TransactionQueryParamsT
     })
 }
 
-export function getPaginatedTransactions (){
-    // const [total , transactions] = Promise.all()
-} 
 export function findTransactionById(id: string) {
     return prisma.transaction.findUnique({
         where: { id }
@@ -66,11 +63,12 @@ export const transactionWithCategory = {
     },
   },
 } satisfies Prisma.TransactionFindManyArgs;
-const whereConditions = (userId: string, filters: TransactionQueryParamsTypes) => {
+const whereConditions = (userId: string, filters: TransactionQueryParamsTypes): Prisma.TransactionWhereInput => {
 
     return {
         userId,
         ...(filters.categoryId) && {categoryId: filters.categoryId},
-        ...(filters.type) && {type: filters.type} 
+        ...(filters.type) && {type: filters.type} ,
+        ...(filters.search) && { merchantName: {contains: filters.search, mode: 'insensitive'} }
     }
 }

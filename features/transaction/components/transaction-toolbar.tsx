@@ -1,31 +1,21 @@
 import React from 'react'
-import { InputGroup, InputGroupInput, InputGroupAddon } from '@/components/ui/input-group'
-import { Search, ArrowDown } from 'lucide-react'
+import {  ArrowDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-const TransactionToolbar = () => {
+import SearchTransaction from './serach-transaction'
+import { Category } from '@/generated/prisma/client'
+import CategoryFilter from './filter/category-filter'
+import TypeFilter from './filter/type-filter'
+const TransactionToolbar = ({categories}: {categories: Category[] | undefined}) => {
   return (
      <div className='p-2 md:p-4 flex justify-between'>
         <div className='w-full'>
-            <InputGroup>
-        <InputGroupInput placeholder="Search Transaction..." />
-        <InputGroupAddon>
-          <Search />
-        </InputGroupAddon>
-      </InputGroup>    
+         <SearchTransaction  />
         </div>
         <div className="flex justify-between">
-            <Button variant={"ghost"}>
-                 Date <ArrowDown />
-            </Button>
-            <Button variant={"ghost"}>
-                Category <ArrowDown />
-            </Button>
-            <Button variant={"ghost"}>
-                Types <ArrowDown />
-            </Button>
-            <Button variant={"ghost"}>
-                Sort <ArrowDown />
-            </Button>
+         
+            <CategoryFilter categories={categories}/>
+            <TypeFilter />
+
         </div>
 
     </div>
