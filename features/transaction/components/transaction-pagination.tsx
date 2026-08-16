@@ -12,15 +12,17 @@ import { PaginationType } from '@/types/Pagination'
 import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 const TransactionPagination = ({pagination} : {pagination: PaginationType}) => {
 
-     const searchParams = useSearchParams();
-              const pathname = usePathname();
-            const { replace } = useRouter();
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
+    const { replace } = useRouter();
     const {page, pageSize, total, totalPages} = pagination;
     const createPageUrl = (pageNumber : number) => {
         
     const params = new URLSearchParams(searchParams);
+    if(pageNumber >= 1 && pageNumber <= totalPages){
         params.set('page', String(pageNumber))
         replace(`${pathname}?${params.toString()}`);
+    }
     }
     
     // replace(`${pathname}?${params.toString()}`);
