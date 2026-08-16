@@ -9,23 +9,33 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination"
 import { PaginationType } from '@/types/Pagination'
+import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 const TransactionPagination = ({pagination} : {pagination: PaginationType}) => {
 
+     const searchParams = useSearchParams();
+              const pathname = usePathname();
+            const { replace } = useRouter();
     const {page, pageSize, total, totalPages} = pagination;
-    const createPageUrl = (pageNumber : number) => `?page=${pageNumber}`;
+    const createPageUrl = (pageNumber : number) => {
+        
+    const params = new URLSearchParams(searchParams);
+        params.set('page', String(pageNumber))
+        replace(`${pathname}?${params.toString()}`);
+    }
     
+    // replace(`${pathname}?${params.toString()}`);
   return (
    <Pagination>
     <PaginationContent>
         <PaginationItem>
             <PaginationPrevious 
-            href={createPageUrl(Math.max(1,page-1))}
+            onClick={()=>{createPageUrl(Math.max(1,page-1))}}
             className={page <= 1 ? "pointer-events-none": "" }/>
         </PaginationItem>
 
  {/* First Page */}
         <PaginationItem>
-          <PaginationLink href={createPageUrl(1)} isActive={page === 1}>
+          <PaginationLink onClick={() => createPageUrl(1)} isActive={page === 1}>
             1
           </PaginationLink>
         </PaginationItem>
@@ -40,7 +50,7 @@ const TransactionPagination = ({pagination} : {pagination: PaginationType}) => {
         {/* Center Active Page Pages */}
         {page > 2 && page < totalPages && (
           <PaginationItem>
-            <PaginationLink href={createPageUrl(page)} isActive>
+            <PaginationLink onClick={() => createPageUrl(page)} isActive>
               {page}
             </PaginationLink>
           </PaginationItem>
@@ -55,7 +65,7 @@ const TransactionPagination = ({pagination} : {pagination: PaginationType}) => {
 
         <PaginationItem>
             <PaginationNext
-            href={createPageUrl(Math.min(totalPages,page+1))}
+            onClick={() => {createPageUrl(Math.min(totalPages,page+1))}}
             className={page >= totalPages ? "pointer-events-none": "" }/>
         </PaginationItem>
 

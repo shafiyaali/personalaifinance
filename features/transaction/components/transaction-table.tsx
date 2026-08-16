@@ -22,7 +22,7 @@ const TransactionTable = ({transactions,  onEdit} : TableProps) => {
         </TableHeader>
         <TableBody>
              {transactions?.length == 0 && <TableRow > 
-                                  <TableCell className={"text-center"} colSpan={5} >No Transactions found. Create your first Transaction
+                                  <TableCell className={"text-center"} colSpan={5} >No Transactions found
             
             
                                   </TableCell>

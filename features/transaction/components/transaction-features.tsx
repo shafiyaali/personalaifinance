@@ -42,7 +42,7 @@ const TransactionFeatures = ({transactions, categories, pagination} : Transactio
             onOpenChange={setEditOpen}
             selectedTransaction ={selectedTransaction}
     />
-{pagination &&
+{pagination && pagination.totalPages >0 &&  
   <TransactionPagination 
     pagination = {pagination}/>
 

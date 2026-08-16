@@ -19,7 +19,7 @@ export default async function Page (props: {
     search: searchParams?.search,
     type: searchParams?.type || undefined,
     page: searchParams?.page || 1,
-    pageSize: searchParams?.pageSize || 5
+    pageSize: searchParams?.pageSize || 1
   }
 
   const transactionsDetails = (await getTransactionAction(filters)).data;
