@@ -20,11 +20,11 @@ export const navItems = [
     href: "/category",
     icon: Tags,
   },
-  {
-    title: "Receipts",
-    href: "/receipt",
-    icon: Receipt,
-  },
+  // {
+  //   title: "Receipts",
+  //   href: "/receipt",
+  //   icon: Receipt,
+  // },
 ];
 
 const SidebarMenuItems = () => {
