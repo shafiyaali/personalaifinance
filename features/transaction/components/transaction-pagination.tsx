@@ -15,7 +15,7 @@ const TransactionPagination = ({pagination} : {pagination: PaginationType}) => {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const { replace } = useRouter();
-    const {page, pageSize, total, totalPages} = pagination;
+    const {page, totalPages} = pagination;
     const createPageUrl = (pageNumber : number) => {
         
     const params = new URLSearchParams(searchParams);

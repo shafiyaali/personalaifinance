@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Personal Finance Management
 
-## Getting Started
+## Overview
+    A full-stack personal finance management application built with Next.js, React, TypeScript, PostgreSQL, Prisma and Docker.
 
-First, run the development server:
+    The project focuses not only on UI development, but also on application architecture, validation, authorization, database design, DTO boundaries, pagination, filtering and production-oriented data handling.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
+    User authentication and authorization
+    Transaction CRUD
+    Category CRUD
+    Income and expense management
+    Transaction filtering
+    Server-side pagination
+    Transaction/category relationships
+    Form validation with Zod
+    React Hook Form integration
+    DTO-based server-to-client data transformation
+    Prisma Decimal serialization
+    Responsive dashboard
+    Financial summary and transaction visualizations
+    PostgreSQL database
+    Dockerized PostgreSQL development environment
+    Protected application routes
+    Reusable UI components with Shadcn/Base UI
+## Architecture
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+    UI
+    ↓
+    Server Actions
+    ↓
+    Service
+    ↓
+    Repository
+    ↓
+    PostgreSQL
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack
+    Frontend
+    Next.js
+    React
+    TypeScript
+    React Hook Form
+    Zod
+    Shadcn/Base UI
+    Tailwind CSS
+    Recharts
+    Backend
+    Next.js Server Actions
+    Service layer
+    Repository layer
+    Prisma ORM
+    Database
+    PostgreSQL
+    Docker
+    Engineering
+    TypeScript
+    Git/GitHub
+    Layered architecture
+    DTO pattern
+    Server-side validation
+    Pagination
+    Filtering
+    Error handling
+## Authentication
+    used BetterAuth for authentication and session management
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Filtering & Pagination
+    Transactions support server-side pagination and filtering.
+    Pagination uses 
+        page and pageSize
+    Filtering can be applied By
+        transaction type
+        category
+        search Text
+## Dashboard
 
-## Learn More
+## DTO / Data Transformation
 
-To learn more about Next.js, take a look at the following resources:
+## Docker Development Setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Database
+    PostgreSQL runs inside Docker during development.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    This keeps the development database environment reproducible rather than depending on a local PostgreSQL installation.
 
-## Deploy on Vercel
+## Project Goals
+    This project was built as a practical full-stack engineering project to demonstrate:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+        Clean separation of concerns
+        Type-safe development
+        Database-backed application design
+        Authentication and authorization
+        Reusable frontend architecture
+        Server-side pagination and filtering
+        Production-oriented data serialization
+        Maintainable code structure
+## Local Setup
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Environment Variables
+
+## Screenshots
+    coming soon
+## Live Demo
+    coming soon

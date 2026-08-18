@@ -21,7 +21,7 @@ const canUpdateDeactive = user.role == "ADMIN"
     canCreate = {canCreateCategory}
     onCreate = {() => setCreateOpen(true)}/>
 
-     <CategoryToolbar  />
+     {/* <CategoryToolbar  /> */}
     <CategoryTable 
     canUpdateDeactivate={canUpdateDeactive} 
     categories={categories}

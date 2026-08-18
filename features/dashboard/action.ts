@@ -6,9 +6,10 @@ import { MonthlyTotalsDTO } from "./types/dto";
 
 export async function getDashboardAction(): Promise<ActionResult<MonthlyTotalsDTO[]>>{
 
-    const dashboardDetails = await getDashboardDeltailsService();
-
+   
     try{
+         const dashboardDetails = await getDashboardDeltailsService();
+
          return {
         success: true,
         data: dashboardDetails

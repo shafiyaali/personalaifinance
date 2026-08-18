@@ -28,8 +28,6 @@ const UpdateTransactionDialog = ({categories, open, onOpenChange, selectedTransa
          
       const onSubmit: SubmitHandler<CreateTransactionType> =async (data) =>{
 
-
-              console.log("data",data);
               if(!selectedTransaction) 
                 return;
 

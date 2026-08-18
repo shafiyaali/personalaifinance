@@ -45,7 +45,7 @@ const UpdateCategoryDialog = ({ category , open, onOpenChange}: UpdateCategoryDi
     form.reset({
         name: category.name
     });
-}, [category]);
+}, [category, form]);
     return (
         <>
             <Dialog

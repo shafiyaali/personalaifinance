@@ -4,7 +4,6 @@ import React from 'react'
 
 const page = async() => {
   const monthlyTransactionDetails = (await getDashboardAction()).data;
-console.log("das",monthlyTransactionDetails);
 
   return (
     <>

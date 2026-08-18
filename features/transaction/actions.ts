@@ -17,6 +17,7 @@ export async function createTransactionAction(data: CreateTransactionType): Prom
         try {
             await createTransactionService(validated.data) 
             revalidatePath("/transaction")
+            revalidatePath("/dashboard");
             return {
                 success: true,
                 message: "Transaction created successfully"
@@ -75,6 +76,7 @@ export async function updateTransactionAction(data:UpdateTransactionType): Promi
         try {
             await updateTransactionService(validated.data) 
             revalidatePath("/transaction")
+            revalidatePath("/dashboard");
             return {
                 success: true,
                 message: "Transaction updated successfully"
@@ -94,6 +96,7 @@ export async function deleteTransactionAction(id:string): Promise<ActionResult> 
     try {
             await deleteTransactionService(id) 
             revalidatePath("/transaction")
+            revalidatePath("/dashboard");
             return {
                 success: true,
                 message: "Transaction deleted successfully"

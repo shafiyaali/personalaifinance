@@ -6,7 +6,7 @@ const TypeFilter = () => {
     const searchParams = useSearchParams();
           const pathname = usePathname();
         const { replace } = useRouter();
-        const currentType= searchParams.get('type') || undefined;
+        // const currentType= searchParams.get('type') || undefined;
     const items = [
         {label: "ALL", value:"ALL"},
         {label: "INCOME", value: "INCOME"},

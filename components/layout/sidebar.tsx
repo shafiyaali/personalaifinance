@@ -1,7 +1,5 @@
 import { Sidebar, SidebarContent, SidebarMenu,SidebarFooter, SidebarHeader, SidebarMenuItem, SidebarMenuButton } from '../ui/sidebar'
-// import SignOut from '@/features/auth/components/sign-out'
-// import { Button } from '../ui/button'
-import { Settings, User, LogOutIcon} from 'lucide-react'
+import { User, LogOutIcon} from 'lucide-react'
 import SidebarItems from './sidebar-menu'
 import { Separator } from '../ui/separator'
 import { getCurrentUser } from '@/lib/current-user'

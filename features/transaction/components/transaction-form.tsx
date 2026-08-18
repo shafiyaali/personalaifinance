@@ -39,9 +39,7 @@ const TransactionForm = (
   return (
     <>
       <DialogContent className="sm:max-w-sm">
-        <form onSubmit={form.handleSubmit(onSubmit,(errors) => {
-          console.log("Form Validation err",errors)
-        })} className="space-y-2">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
           <DialogHeader className='text-center'>
             <DialogTitle>{title}</DialogTitle>
           </DialogHeader>

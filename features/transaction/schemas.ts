@@ -2,7 +2,9 @@ import { z } from "zod";
 
 export const createTransactionSchema = z.strictObject({
     type: z.enum(["INCOME", "EXPENSE"]), 
-    amount: z.number().gt(0, {
+    amount: z.number({
+        error: "Ammount is required"
+    }).gt(0, {
         message: "Amount must be greater than 0" 
     }),
     merchantName: z.string().trim().max(50, {
@@ -14,7 +16,9 @@ export const createTransactionSchema = z.strictObject({
     description: z.string().trim().max(200, {
         message: "Description must be maximum of 200 characters"
     }).optional(),
-    categoryId: z.number().int().positive({
+    categoryId: z.number({
+        error:"Category is required"
+    }).int().positive({
         message: "Select an active category"
     })
 });
@@ -25,7 +29,7 @@ export const updateTransactionSchema = createTransactionSchema.extend({
 
 export const TransactionQueryParamsSchema = z.strictObject({
     page : z.coerce.number().gte(1),
-    pageSize: z.coerce.number().gte(1).max(30),
+    pageSize: z.coerce.number().gte(5).max(30),
     search : z.string().optional(),
     type: z.enum(["INCOME", "EXPENSE"]).optional(),
     categoryId: z.coerce.number().optional(),

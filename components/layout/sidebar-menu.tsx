@@ -1,7 +1,7 @@
 "use client"
 import clsx from 'clsx';
 import { SidebarMenu, SidebarMenuItem, SidebarMenuButton } from '../ui/sidebar';
-import { LayoutDashboard, Wallet, Tags, Receipt } from 'lucide-react';
+import { LayoutDashboard, Wallet, Tags } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 export const navItems = [

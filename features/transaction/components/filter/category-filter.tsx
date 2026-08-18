@@ -6,7 +6,7 @@ const CategoryFilter =  ({categories}: {categories: Category[] | undefined}) => 
    const searchParams = useSearchParams();
       const pathname = usePathname();
     const { replace } = useRouter();
-    const currentCategory = searchParams.get('categoryId') || undefined;
+    // const currentCategory = searchParams.get('categoryId') || undefined;
       const items = categories?.map((category) => ({
     label: category.name,
     value: String(category.id),
@@ -29,7 +29,7 @@ const  handleFilter = (term: string | null)  => {
       value: "ALL",
       isActive: false
     })
-  },[]);
+  },[items]);
 
   return (
    <Select items={items} defaultValue={"ALL"}  onValueChange={handleFilter}>

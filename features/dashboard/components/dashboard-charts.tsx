@@ -1,6 +1,5 @@
 import React from 'react'
 import { MonthlyTotalsDTO } from '../types/dto'
-import { TrendingUp } from "lucide-react"
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
 import {
   Card,
@@ -20,8 +19,6 @@ type ChartType = {
     monthlyTransactionDetails : MonthlyTotalsDTO[] | undefined
 }
 const DashboardCharts = ({monthlyTransactionDetails}: ChartType) => {
-   console.log("Data",monthlyTransactionDetails);
-
 
    
     const chartConfig = {

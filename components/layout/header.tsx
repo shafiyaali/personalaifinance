@@ -1,7 +1,6 @@
 "use client"
 import { SidebarTrigger } from '../ui/sidebar'
-import { Input } from '../ui/input'
-import { BellIcon, MoonIcon , SearchIcon} from 'lucide-react'
+import { SearchIcon} from 'lucide-react'
 import { Separator } from '../ui/separator'
 import { InputGroup, InputGroupInput, InputGroupAddon } from '../ui/input-group'
 const Header = () => {

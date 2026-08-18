@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react'
 import { DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose,  } from '@/components/ui/dialog'
 import { categoryType, CreateCategoryType } from '../types'
 import { SubmitHandler, UseFormReturn } from 'react-hook-form';
