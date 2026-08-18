@@ -1,7 +1,7 @@
 "use client"
 import React, {useState} from 'react'
 import CategoryHeader from './categoryHeader'
-import CategoryToolbar from './categoryToolbar'
+// import CategoryToolbar from './categoryToolbar'
 import CategoryTable from './categoryTable'
 import { Category } from '@/generated/prisma/client'
 import CreateCategoryDialog from './createCategoryDialog'
