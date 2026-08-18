@@ -18,8 +18,8 @@ const Header = () => {
         </InputGroupAddon>
       </InputGroup>
         {/* <SearchIcon /> */}
-        <MoonIcon />
-    <BellIcon />
+        {/* <MoonIcon /> */}
+    {/* <BellIcon /> */}
 
 
         </div>

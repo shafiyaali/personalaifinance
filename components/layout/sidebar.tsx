@@ -21,7 +21,7 @@ const AppSidebar = async () => {
             <SidebarMenu>
                 <SidebarMenuItem>
                     <SidebarMenuButton><User />{user.name}</SidebarMenuButton>
-                    <SidebarMenuButton ><Settings /> Settings</SidebarMenuButton>
+                    {/* <SidebarMenuButton ><Settings /> Settings</SidebarMenuButton> */}
                     <SidebarMenuButton onClick={SignOutAction}><LogOutIcon />  LogOut</SidebarMenuButton>
                 </SidebarMenuItem>
             </SidebarMenu>
