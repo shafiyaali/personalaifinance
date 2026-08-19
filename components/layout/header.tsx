@@ -11,7 +11,7 @@ const Header = () => {
             <SidebarTrigger className="md:hidden" />
 
           <InputGroup>
-        <InputGroupInput placeholder="Search Transactions" />
+        <InputGroupInput placeholder="Search Transactions" disabled/>
         <InputGroupAddon align={'inline-end'}>
           <SearchIcon />
         </InputGroupAddon>

@@ -29,7 +29,7 @@ const SearchTransaction = () => {
         }}
 
         
-        id="inline-start-input" placeholder="Search..." />
+        id="inline-start-input" placeholder="Search Merchant..." />
         <InputGroupAddon align="inline-start">
           <SearchIcon className="text-muted-foreground" />
         </InputGroupAddon>
