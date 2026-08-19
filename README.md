@@ -102,4 +102,4 @@
 ## Screenshots
     coming soon
 ## Live Demo
-    coming soon
+    https://personalaifinance.vercel.app/
