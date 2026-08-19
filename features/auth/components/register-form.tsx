@@ -17,6 +17,7 @@ import { FieldError } from '@/components/ui/field';
 export function SignupForm () {
 
    const [formError, setFormError] = useState<string | undefined>("")
+   const [successMessage, setSuccessMessage] = useState<string | undefined>("");
     const {register, handleSubmit, formState: {
             errors, isSubmitting
     }
@@ -30,7 +31,11 @@ export function SignupForm () {
    
     const result = await registerAction(data)  
    if(!result.success) {
+      setSuccessMessage("");
       setFormError(result?.message)
+   } else {
+      setSuccessMessage("Registered Successfully. Please Sign in to continue")
+      setFormError(undefined);
    }
       
 
@@ -68,6 +73,7 @@ export function SignupForm () {
             {/* <Input {...register('phone')} type='number' placeholder='number'/>
              {errors.phone && <div className="text-red-500">{errors.phone.message}</div>} */}
         <FieldError >{formError}</FieldError>
+        {successMessage && <p className=''>{successMessage}</p>}
         <Button className="w-full" size="lg" disabled={isSubmitting} type='submit'>
            {isSubmitting ? "Creating Account" : "Create Account"}
         </Button>
